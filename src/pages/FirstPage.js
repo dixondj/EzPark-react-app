@@ -2,6 +2,7 @@ import React from 'react'
 import BigLogo from '../BigLogo.png'
 import {Link} from 'react-router-dom'
 
+// style
 const container = {
     display:'flex',
     flexDirection:'column',
@@ -44,7 +45,7 @@ const img = {
     marginLeft:'auto',
     marginRight:'auto',
 }
-
+//endstyle
 
 const FirstPageButton = () =>{
     return(

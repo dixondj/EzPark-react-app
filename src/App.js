@@ -11,9 +11,6 @@ function App() {
   return (
     <>
       <Switch>
-        {/* <div>
-          <Loader/>
-        </div> */}
         <Route exact path='/'>
             <FirstPageButton/>
        </Route>
