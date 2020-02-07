@@ -10,11 +10,14 @@ import { Link } from 'react-router-dom'
 const container = {
   display: 'flex',
   flexDirection: 'column',
+  minHeight:'100vh',
+  // border:'solid black 0.1px'
 }
 
 const Timg = {
-  display: 'flex',
+  display: 'flex',  
   flexDirection: 'column',
+  marginTop: '5vh',
 }
 
 const Tform = {
@@ -39,9 +42,10 @@ const btn2 = {
   marginLeft: 'auto',
   marginRight: 'auto',
   width: '200px',
-  backgroundColor: 'blue',
-  color: 'white',
+  backgroundColor: 'white',
+  color: 'purple', 
   borderRadius: '20px',
+  border:' solid 1px purple',
   margin: '4px'
 }
 //endstyle
@@ -56,7 +60,7 @@ const LoginPage = makeStyles(theme => ({
     },
   },
   margin: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(0),
   },
 }));
 
@@ -66,10 +70,11 @@ export default function BasicTextFields() {
   return (
     <div>
       <div style={container}>
-        <div style={{ display: 'block' }}>
+        <div style={{ display: 'block', background:'purple'}}>
           <Link to="/">
-            <IconButton className={classes.margin} size="big ">
+            <IconButton className={classes.margin} size="big" style={{color:'white',fontSize: 30}}>
               <ArrowBackIcon fontSize="inherit" />
+              <p></p>
             </IconButton>
           </Link>
         </div>
