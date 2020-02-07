@@ -6,6 +6,7 @@ import FirstPageButton from './pages/FirstPage';
 import Loader from './pages/LoaderPager';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignUpPage';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
        </Route>
        <Route exact path='/signup'>
             <SignupPage/>
+       </Route>
+       <Route exact path='/home'>
+            <HomePage />
        </Route>
       </Switch>
     </>
