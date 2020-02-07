@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, withTheme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import BigLogo from '../BigLogo.png'
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom'
+import Axios from 'axios';
+import { useHistory } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 //style
 const container = {
   display: 'flex',
   flexDirection: 'column',
-  minHeight:'100vh',
+  minHeight: '100vh',
   // border:'solid black 0.1px'
 }
 
 const Timg = {
-  display: 'flex',  
+  display: 'flex',
   flexDirection: 'column',
   marginTop: '5vh',
 }
@@ -43,9 +46,9 @@ const btn2 = {
   marginRight: 'auto',
   width: '200px',
   backgroundColor: 'white',
-  color: 'purple', 
+  color: 'purple',
   borderRadius: '20px',
-  border:' solid 1px purple',
+  border: ' solid 1px purple',
   margin: '4px'
 }
 //endstyle
@@ -65,14 +68,46 @@ const LoginPage = makeStyles(theme => ({
 }));
 
 export default function BasicTextFields() {
-  const classes = LoginPage();
+  const classes = LoginPage()
+
+  const history = useHistory()
+  const [usernameInput, setUsernameInput] = useState("")
+  const [passwordInput, setPasswordInput] = useState("")
+
+  const handleUsername = e => {
+    setUsernameInput(e.target.value)
+  }
+
+  const handlePassword = e2 => {
+    setPasswordInput(e2.target.value)
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    // console.log(`Username: ${usernameInput} , `, `Password: ${passwordInput} .`)
+    Axios.post('http://ezpark-next.herokuapp.com/api/v1/users/login', {
+        username: `${usernameInput}`,
+        password: `${passwordInput}`
+    })
+    .then(result => {
+      const {status, message, token, user} = result.data
+        localStorage.setItem('jwt', token)
+        console.log(status)
+        console.log(message)
+        console.log(token)
+        console.log(user)
+        history.push(`/home`)
+    }).catch(err => {
+      console.log(err.response.data.message)
+    })
+}
 
   return (
     <div>
       <div style={container}>
-        <div style={{ display: 'block', background:'purple'}}>
+        <div style={{ display: 'block', background: 'purple' }}>
           <Link to="/">
-            <IconButton className={classes.margin} size="big" style={{color:'white',fontSize: 30}}>
+            <IconButton className={classes.margin} size="big" style={{ color: 'white', fontSize: 30 }}>
               <ArrowBackIcon fontSize="inherit" />
               <p></p>
             </IconButton>
@@ -82,9 +117,9 @@ export default function BasicTextFields() {
           <img src={BigLogo} alt="logo" width="75%" style={img} />
         </div>
         <div style={Tform}>
-          <form className={classes.root} noValidate autoComplete="off" style={form}>
-            <TextField label="Username" />
-            <TextField label="Password" />
+          <form onSubmit={handleSubmit} className={classes.root} noValidate autoComplete="off" style={form}>
+            <TextField label="Username" name="username" onChange={handleUsername} value={usernameInput} />
+            <TextField label="Password" type="password" name="password" onChange={handlePassword} value={passwordInput} />
             <button class="ui button" style={btn2}>Login</button>
           </form>
         </div>

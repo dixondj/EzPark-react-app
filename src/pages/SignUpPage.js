@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
 import styled from 'styled-components';
 import Axios from 'axios';
@@ -85,7 +85,7 @@ function SignupPage() {
       console.log(status)
       console.log(message)
       console.log(user)
-      history.push('/home')
+      history.push('/login')
       
     })
     .catch(err => {

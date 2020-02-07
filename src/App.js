@@ -3,7 +3,6 @@ import './App.css';
 import {Route, Switch } from 'react-router-dom'
 
 import FirstPageButton from './pages/FirstPage';
-import Loader from './pages/LoaderPager';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
