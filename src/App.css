@@ -43,3 +43,8 @@
   bottom: 0;
   background-image: linear-gradient(purple, blue, black);
 }
+
+.MuiOutlinedInput-root {
+  position: relative;
+  border-radius: 50px;
+}

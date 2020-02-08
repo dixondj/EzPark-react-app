@@ -7,7 +7,6 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom'
-import { toast } from 'react-toastify';
 
 //style
 const container = {
@@ -109,7 +108,6 @@ export default function BasicTextFields() {
           <Link to="/">
             <IconButton className={classes.margin} size="big" style={{ color: 'white', fontSize: 30 }}>
               <ArrowBackIcon fontSize="inherit" />
-              <p></p>
             </IconButton>
           </Link>
         </div>
