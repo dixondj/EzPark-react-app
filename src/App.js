@@ -14,6 +14,7 @@ import FindMyCarPage from './pages/FindMyCarPage';
 import SettingPage from './pages/Setting';
 
 import Navbar from './components/navbar';
+import TopNavbar from './components/topNavbar';
 
 
 const routes = [
@@ -53,30 +54,47 @@ const routes = [
      }
 ]
 
+
+const Content = styled.div`
+     position: fixed;
+     top: ${props => props.isTopFullScreen ? '0' : '55px'};;
+     left: 0;
+     right: 0;
+     bottom: ${props => props.isFullScreen ? '0' : '55px'};
+     overflow-y: scroll;
+     `
+
 const pathsWithoutNav = [
      '/login',
      '/signup',
      '/'
 ]
 
-const Content = styled.div`
-     position: fixed;
-     top: 0;
-     left: 0;
-     right: 0;
-     bottom: ${props => props.isFullScreen ? '0' : '55px'};
-     overflow-y: scroll;
-`
+const pathsWithoutTopNav = [
+     '/home',
+     '/login',
+     '/signup',
+     '/'
+]
 
+const pageTitles = {
+     '/setting': 'Setting',
+     '/history': 'History',
+     '/findmycar': 'Find My Car',
+}
 
 const App = withRouter(({ location }) => {
      const isFullScreen =  pathsWithoutNav.some(path => location.pathname === path)
+     const isTopFullScreen =  pathsWithoutTopNav.some(path => location.pathname === path)
      return (
           <>
                {
                  isFullScreen  ? '' : <Navbar />
                }
-               <Content isFullScreen={isFullScreen}>
+               {
+                 isTopFullScreen  ? '' : <TopNavbar title={pageTitles[location.pathname]}/>
+               }
+               <Content isFullScreen={isFullScreen} isTopFullScreen={isTopFullScreen}>
                     <AnimatedSwitch location={location}>
                          {routes.map(route => {
                               return (

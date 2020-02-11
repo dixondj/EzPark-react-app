@@ -104,7 +104,7 @@ function SignupPage() {
               <ArrowBackIcon fontSize="inherit" />
             </IconButton>
           </Link>
-          <h3 style={{ display:'block', color: 'white', margin:'auto 120px'}}>Register</h3>
+          <h3 style={{ display:'block', color: 'white', margin:'auto 25%'}}>Register</h3>
         </div>
       </div>
       <Form onSubmit={handleSubmit} className={classes.root} noValidate autoComplete="off">
