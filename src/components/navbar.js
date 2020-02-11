@@ -1,25 +1,48 @@
-import React, { useState } from 'react';
-import { Navbar } from 'react-bootstrap';
-const MyNav = (props) => {
-  const [collapsed, setCollapsed] = useState(true);
+import React from 'react'
+import { Link } from 'react-router-dom';
+import IconButton from '@material-ui/core/IconButton';
+import HomeIcon from '@material-ui/icons/Home';
+import DriveEtaIcon from '@material-ui/icons/DriveEta';
+import HistoryIcon from '@material-ui/icons/History';
+import SettingsIcon from '@material-ui/icons/Settings';
 
-  const toggleNavbar = () => setCollapsed(!collapsed);
-
-  return (
-    <>
-    <Navbar bg="dark">
-      <Navbar.Brand href="/">
-        <img
-          src="/logo.svg"
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-          alt="React Bootstrap logo"
-        />
-      </Navbar.Brand>
-    </Navbar>
-  </>
-  );
+const navbar = {
+  display: 'flex',
+  background: 'purple',
+  justifyContent: 'space-around',
+  position: 'fixed',
+  height: '55px',
+  bottom: 0,
+  left:0,
+  right:0,
+  zIndex: 1
 }
 
-export default MyNav;
+const Navbar = (props) => {
+  return (
+    <div style={navbar}>
+      <Link to="/home">
+        <IconButton size="big" style={{ color: 'white', fontSize: 30 }}>
+          <HomeIcon fontSize="inherit" />
+        </IconButton>
+      </Link>
+      <Link to="/findmycar">
+        <IconButton size="big" style={{ color: 'white', fontSize: 30 }}>
+          <DriveEtaIcon fontSize="inherit" />
+        </IconButton>
+      </Link>
+      <Link to="/history">
+        <IconButton size="big" style={{ color: 'white', fontSize: 30 }}>
+          <HistoryIcon fontSize="inherit" />
+        </IconButton>
+      </Link>
+      <Link to="/setting">
+        <IconButton size="big" style={{ color: 'white', fontSize: 30 }}>
+          <SettingsIcon fontSize="inherit" />
+        </IconButton>
+      </Link>
+    </div>
+  )
+}
+
+export default Navbar

@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import BigLogo from '../BigLogo.png'
-
-import IconButton from '@material-ui/core/IconButton';
-import HomeIcon from '@material-ui/icons/Home';
-import DriveEtaIcon from '@material-ui/icons/DriveEta';
-import HistoryIcon from '@material-ui/icons/History';
-import SettingsIcon from '@material-ui/icons/Settings';
 
 // style
 const container = {
     position: 'relative',
-    minHeight: '100vh',
+    height: '100%',
     background: 'black',
     backgroundImage: `url(${BigLogo})`
 }
@@ -22,7 +15,7 @@ const container = {
 const opacityColor = {
     background: 'lightGray',
     opacity: 0.6,
-    minHeight: '100vh'
+    height: '100%',
 }
 
 const searchBar = {
@@ -32,6 +25,7 @@ const searchBar = {
     transform: 'translate( -50%, -50%)',
     opacity: 1
 }
+
 
 // endstyle
 
@@ -69,30 +63,7 @@ const HomePage = () => {
                     )}
                 />
             </div>
-            <div style={{
-                display: 'flex', background: 'purple', justifyContent: 'space-around', position: 'absolute', bottom: 0, minWidth: '100vw'
-            }}>
-                <Link to="/home">
-                    <IconButton size="big" style={{ color: 'white', fontSize: 30 }}>
-                        <HomeIcon fontSize="inherit" />
-                    </IconButton>
-                </Link>
-                <Link to="/home">
-                    <IconButton size="big" style={{ color: 'white', fontSize: 30 }}>
-                        <DriveEtaIcon fontSize="inherit" />
-                    </IconButton>
-                </Link>
-                <Link to="/home">
-                    <IconButton size="big" style={{ color: 'white', fontSize: 30 }}>
-                        <HistoryIcon fontSize="inherit" />
-                    </IconButton>
-                </Link>
-                <Link to="/home">
-                    <IconButton size="big" style={{ color: 'white', fontSize: 30 }}>
-                        <SettingsIcon fontSize="inherit" />
-                    </IconButton>
-                </Link>
-            </div>
+    
         </div >
     )
 }

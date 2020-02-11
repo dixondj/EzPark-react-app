@@ -12,7 +12,7 @@ import { useHistory } from 'react-router-dom'
 const container = {
   display: 'flex',
   flexDirection: 'column',
-  minHeight: '100vh',
+  height: '100%',
   // border:'solid black 0.1px'
 }
 
