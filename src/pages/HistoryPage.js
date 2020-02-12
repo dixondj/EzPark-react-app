@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from '@material-ui/icons/Close';
 import Axios from 'axios';
+import Loading from "../components/Loading";
 
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -99,6 +100,7 @@ const HistoryPage = () => {
             .then(result => {
                 setHistory(result.data.history)
                 console.log(result.data.history)
+                setIsLoading(false)
             })
             .catch(err => {
                 console.log(err.response)
@@ -126,6 +128,10 @@ const HistoryPage = () => {
             })
     }
 
+    const [isLoading, setIsLoading] = useState(true)
+    if (isLoading) {
+        return <Loading />
+    }
     if (!history.length) return <div>No History</div>
 
     return (

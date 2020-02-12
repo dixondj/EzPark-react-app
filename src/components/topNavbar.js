@@ -2,7 +2,7 @@ import React from 'react'
 
 const navbar = {
     display: 'flex',
-    background: 'purple',
+    background: '#5d3194',
     position: 'fixed',
     height: '54px',
     top: 0,
@@ -14,10 +14,9 @@ const TopNavbar = ({ title }) => {
     return (
         <div>
             <div style={navbar}>
-                <h3 style={{ display: 'block', color: 'white', margin: 'auto' }}>{title}</h3>
+                <h3 style={{ display: 'block', color: '#FBFBFB', margin: 'auto' }}>{title}</h3>
             </div>
         </div>
     )
 }
-
 export default TopNavbar

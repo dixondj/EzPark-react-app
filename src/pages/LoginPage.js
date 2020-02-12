@@ -7,6 +7,9 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify'
+
 
 //style
 const container = {
@@ -83,7 +86,6 @@ export default function BasicTextFields() {
 
   const handleSubmit = e => {
     e.preventDefault()
-    // console.log(`Username: ${usernameInput} , `, `Password: ${passwordInput} .`)
     Axios.post('http://ezpark-next.herokuapp.com/api/v1/users/login', {
         username: `${usernameInput}`,
         password: `${passwordInput}`
@@ -91,26 +93,41 @@ export default function BasicTextFields() {
     .then(result => {
       const {status, message, token, user} = result.data
         localStorage.setItem('jwt', token)
-        console.log(status)
-        console.log(message)
-        console.log(token)
-        console.log(user)
         history.push(`/home`)
+          toast.success(message, {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+        });
     }).catch(err => {
       console.log(err.response.data.message)
-    })
+      toast.error(err.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true
+    });
+    }) 
 }
 
   return (
     <div>
+      <ToastContainer closeButton={false} autoClose={5000} style={{marginTop: '55px'}}/>
       <div style={container}>
-        <div style={{ display: 'block', background: 'purple' }}>
-          <Link to="/">
-            <IconButton className={classes.margin} size="big" style={{ color: 'white', fontSize: 30 }}>
+      <div style={{ display:'flex',background:'#5d3194'}}>
+          <Link to ="/">
+            <IconButton className={classes.margin} size="big" style={{ color:'white', fontSize:30}}> 
               <ArrowBackIcon fontSize="inherit" />
             </IconButton>
           </Link>
+          <h3 style={{ display:'block', color: 'white', margin:'auto 30%'}}>Login</h3>
         </div>
+      
         <div style={Timg}>
           <img src={BigLogo} alt="logo" width="75%" style={img} />
         </div>

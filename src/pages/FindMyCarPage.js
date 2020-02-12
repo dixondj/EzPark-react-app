@@ -7,15 +7,17 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
+
 import StoreIcon from "@material-ui/icons/Store";
 import FilterNoneIcon from "@material-ui/icons/FilterNone";
 import LocalParkingIcon from "@material-ui/icons/LocalParking";
 import TodayIcon from "@material-ui/icons/Today";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
+import Loading from "../components/Loading";
 
 const Page = styled.div`
     height: 100%;
-`
+    `
 
 const useStyles = makeStyles({
     root: {
@@ -38,7 +40,7 @@ const useStyles = makeStyles({
 const FindMyCarPage = () => {
     const classes = useStyles();
     const [findCar, setFindCar] = useState([])
-
+    
     const jwt = localStorage.getItem('jwt')
     useEffect(() => {
         Axios({
@@ -48,15 +50,21 @@ const FindMyCarPage = () => {
                 Authorization: `Bearer ${jwt}`,
             },
         })
-            .then(result => {
-                setFindCar(result.data)
-                console.log(result.data)
-            })
-            .catch(err => {
-                console.log(err.response)
-            })
+        .then(result => {
+            setFindCar(result.data)
+            console.log(result.data)
+            setIsLoading(false)
+        })
+        .catch(err => {
+            console.log(err.response)
+        })
     }, [])
-
+    
+    const [isLoading, setIsLoading] = useState(true)
+    if (isLoading) {
+        return <Loading />
+    }
+    
     return (
         <Page>
             <Card className={classes.root} style={{ margin: '5px' }} variant="outlined">

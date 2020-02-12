@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Axios from 'axios';
 import BigLogo from '../BigLogo.png'
-
+import { ToastContainer } from 'react-toastify';
 // style
 const container = {
     position: 'relative',
@@ -49,7 +49,9 @@ const HomePage = () => {
     const [malls, setMall] = useState([])
 
     return (
+        
         <div style={container}>
+            <ToastContainer closeButton={false} autoClose={5000}/>
             <div style={opacityColor} />
             <div style={searchBar}>
                 <h1>What Mall ?</h1>

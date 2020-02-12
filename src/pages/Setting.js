@@ -11,6 +11,7 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -21,6 +22,10 @@ import CloseIcon from "@material-ui/icons/Close";
 import styled from 'styled-components'
 import EditListItem from "../components/EditListItem";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify'
+
 
 const Page = styled.div`
     height: 100%;
@@ -79,9 +84,26 @@ const SettingPage = () => {
             }
         })
             .then(result => {
-                console.log(result)
                 setUser(result.data.user)
                 handleClose()
+                toast.success(result.data.message, {
+                    position: "top-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
+            })
+            .catch(err => {
+                toast.error(err.response.data.message[0], {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true
+                });
             })
     }
 
@@ -90,7 +112,7 @@ const SettingPage = () => {
         { api_url: 'edit_firstname', fieldName: 'new_firstname', title: "First Name", subtitle: user.first_name, iconComponent: <AccountBoxIcon />, dialogContent: 'Edit your First Name' },
         { api_url: 'edit_lastname', fieldName: 'new_lastname', title: "Last Name", subtitle: user.last_name, iconComponent: <AccountBoxIcon />, dialogContent: 'Edit your Last Name' },
         { api_url: 'edit_email', fieldName: 'new_email', type: 'email', title: "Email", subtitle: user.email, iconComponent: <EmailIcon />, dialogContent: 'What is the new email address?' },
-        { api_url: 'edit_password', fieldName: 'new_password', type: 'password', title: "Passord", subtitle: '*********', iconComponent: <VpnKeyIcon />, dialogContent: 'Really want to chnage password?' },
+        { api_url: 'edit_password', fieldName: 'new_password', type: 'password', title: "Password", subtitle: '*********', iconComponent: <VpnKeyIcon />, dialogContent: 'Really want to chnage password?' },
         { api_url: 'edit_hp', fieldName: 'new_hp', title: "Phone Number", subtitle: user.hp_number, iconComponent: <PhoneIcon />, dialogContent: 'You should upload your new phone?' },
     ]
 
@@ -101,47 +123,51 @@ const SettingPage = () => {
 
     return (
         <Page>
-            <List className={classes.root}>
-                {
-                    listData.map(listInfo => <EditListItem key={listInfo.title} {...listInfo} onClick={() => { handleClickOpen(listInfo) }} />)
-                }
-            </List>
-            <Dialog
-                open={info !== null}
-                onClose={handleClose}
-                aria-labelledby="form-dialog-title"
-            >
-                <DialogTitle id="form-dialog-title">
-                    Edit {info && info.title}
-                    <Button onClick={handleClose} color="primary">
-                        <CloseIcon />
+            <ToastContainer closeButton={false} autoClose={5000}/>
+            <div style={{ paddingTop: '2%' }}>
+                <Typography variant="h5" component="h2" style={{ marginLeft: '5%' }}>User Info</Typography>
+                <List className={classes.root}>
+                    {
+                        listData.map(listInfo => <EditListItem key={listInfo.title} {...listInfo} onClick={() => { handleClickOpen(listInfo) }} />)
+                    }
+                </List>
+                <Dialog
+                    open={info !== null}
+                    onClose={handleClose}
+                    aria-labelledby="form-dialog-title"
+                >
+                    <DialogTitle id="form-dialog-title">
+                        Edit {info && info.title}
+                        <Button onClick={handleClose} color="primary">
+                            <CloseIcon />
+                        </Button>
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {info && info.dialogContent}
+                        </DialogContentText>
+                        <TextField
+                            autoFocus
+                            name={info && info.fieldName}
+                            margin="dense"
+                            id={info && info.api_url}
+                            inputRef={textInput}
+                            fullWidth
+                            type={(info && info.type) || 'text'}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleSubmit} color="primary">
+                            Submit
                     </Button>
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        {info && info.dialogContent}
-                    </DialogContentText>
-                    <TextField
-                        autoFocus
-                        name={info && info.fieldName}
-                        margin="dense"
-                        id={info && info.api_url}
-                        inputRef={textInput}
-                        fullWidth
-                        type={(info && info.type) || 'text'}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleSubmit} color="primary">
-                        Submit
-                    </Button>
-                </DialogActions>
-            </Dialog>
-            <div style={{width:'100%', textAlign: 'center'}}>
-                <Button variant="contained" color="secondary" style={{ width: '80%', marginTop:'10px'}} onClick={handleLogout} >
-                    <ExitToAppIcon style={{ marginRight: '10px' }} />
-                    Logouts
+                    </DialogActions>
+                </Dialog>
+                <div style={{ width: '100%', textAlign: 'center' }}>
+                    <Button variant="contained" color="secondary" style={{ width: '80%', marginTop: '5%' }} onClick={handleLogout} >
+                        <ExitToAppIcon style={{ marginRight: '10px' }} />
+                        Logouts
                 </Button>
+                </div>
             </div>
         </Page>
     )

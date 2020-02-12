@@ -2,9 +2,7 @@ import React from 'react';
 import './App.css';
 import { Route, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
-
 import { AnimatedSwitch } from "./AnimatedSwitch";
-
 import FirstPageButton from './pages/FirstPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignUpPage';
@@ -12,10 +10,8 @@ import HomePage from './pages/HomePage';
 import HistoryPage from './pages/HistoryPage';
 import FindMyCarPage from './pages/FindMyCarPage';
 import SettingPage from './pages/Setting';
-
 import Navbar from './components/navbar';
 import TopNavbar from './components/topNavbar';
-
 
 const routes = [
      {
@@ -87,27 +83,27 @@ const App = withRouter(({ location }) => {
      const isFullScreen =  pathsWithoutNav.some(path => location.pathname === path)
      const isTopFullScreen =  pathsWithoutTopNav.some(path => location.pathname === path)
      return (
-          <>
+          <div>
                {
-                 isFullScreen  ? '' : <Navbar />
+                    isFullScreen  ? '' : <Navbar />
                }
                {
-                 isTopFullScreen  ? '' : <TopNavbar title={pageTitles[location.pathname]}/>
+                    isTopFullScreen  ? '' : <TopNavbar title={pageTitles[location.pathname]}/>
                }
                <Content isFullScreen={isFullScreen} isTopFullScreen={isTopFullScreen}>
                     <AnimatedSwitch location={location}>
                          {routes.map(route => {
                               return (
                                    <Route exact
-                                        key={route.path}
-                                        path={route.path}
-                                        component={route.component}
+                                   key={route.path}
+                                   path={route.path}
+                                   component={route.component}
                                    />
-                              )
-                         })}
+                                   )
+                              })}
                     </AnimatedSwitch>
                </Content>
-          </>
+          </div>
      )
 })
 
