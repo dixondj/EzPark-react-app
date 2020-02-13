@@ -4,19 +4,23 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Axios from 'axios';
 import BigLogo from '../BigLogo.png'
 import { ToastContainer } from 'react-toastify';
+import { useHistory } from 'react-router-dom'
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
 // style
 const container = {
     position: 'relative',
     height: '100%',
-    background: 'black',
+    background: '#efefef',
     backgroundImage: `url(${BigLogo})`
 }
 
-const opacityColor = {
-    background: 'lightGray',
-    opacity: 0.6,
-    height: '100%',
-}
+// const opacityColor = {
+//     background: 'white',
+//     opacity: 0.6,
+//     height: '100%',
+// }
 
 const searchBar = {
     position: 'absolute',
@@ -26,18 +30,34 @@ const searchBar = {
     opacity: 1
 }
 
-
+const btn ={
+    color:'purple',
+    border:'solid 1px purple',
+    width:'50%',
+}
 // endstyle
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+        },
+    },
+}));
 
 
 const HomePage = () => {
+    const [malls, setMall] = useState([])
+    const [mallName, setMallName] = useState("")
+    const classes = useStyles();
+
+    const history = useHistory()
 
     useEffect(() => {
         // performing a GET request
         Axios.get('http://ezpark-next.herokuapp.com/api/v1/features/')
             .then(result => {
                 // If successful, we do stuffs with 'result'
-                console.log(result.data.mall)
                 setMall(result.data.mall)
             })
             .catch(error => {
@@ -46,26 +66,59 @@ const HomePage = () => {
             })
     }, [])
 
-    const [malls, setMall] = useState([])
+    const handleInput = (e, v) => {
+        setMallName(v)
+    }
+
+    const handleMallSelect = e => {
+        e.preventDefault()
+        // console.log(mallName)
+        Axios({
+            method: 'post',
+            url: `http://ezpark-next.herokuapp.com/api/v1/features/layout`,
+            data: {
+                mall: `${mallName.name}`
+            }
+        })
+
+            .then(result => {
+                // console.log(result.data)
+                history.push({
+                    pathname: '/parkinglayout/' + result.data.id
+                })
+                // console.log(result.data)
+            })
+
+            .catch(err => {
+                console.log(err.response)
+            })
+    }
 
     return (
-        
+
         <div style={container}>
-            <ToastContainer closeButton={false} autoClose={5000}/>
-            <div style={opacityColor} />
+            <ToastContainer closeButton={false} autoClose={5000} />
+            {/* <div style={opacityColor} /> */}
             <div style={searchBar}>
                 <h1>What Mall ?</h1>
-                <Autocomplete
-                    id="combo-box-demo"
-                    options={malls}
-                    getOptionLabel={option => option.name}
-                    style={{ width: 300 }}
-                    renderInput={params => (
-                        <TextField {...params} label="Select Mall..." variant="outlined" fullWidth class='MuiOutlinedInput-root' />
-                    )}
-                />
+                <form onSubmit={handleMallSelect}>
+                    <Autocomplete
+                        id="combo-box-demo"
+                        options={malls}
+                        getOptionLabel={option => option.name}
+                        style={{ width: 300 }}
+                        // onChange={(e,v) => setMallName(v)}
+                        onChange={handleInput}
+                        renderInput={params => (
+                            <TextField {...params} label="Select Mall..." variant="outlined" fullWidth class='MuiOutlinedInput-root' />
+                        )}
+                    />
+                    <div className={classes.root}>
+                        <Button type="submit" style={btn}>Submit</Button>
+                    </div>
+                </form>
             </div>
-    
+
         </div >
     )
 }

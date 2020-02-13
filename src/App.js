@@ -12,6 +12,7 @@ import FindMyCarPage from './pages/FindMyCarPage';
 import SettingPage from './pages/Setting';
 import Navbar from './components/navbar';
 import TopNavbar from './components/topNavbar';
+import ParkingLayout from './pages/ParkingLayout';
 
 const routes = [
      {
@@ -47,6 +48,11 @@ const routes = [
      {
           component: SettingPage,
           path: "/setting"
+     },
+
+     {
+          component: ParkingLayout,
+          path: "/parkinglayout/:id"
      }
 ]
 
@@ -61,16 +67,16 @@ const Content = styled.div`
      `
 
 const pathsWithoutNav = [
+     '/parkinglayout',
      '/login',
      '/signup',
-     '/'
 ]
 
 const pathsWithoutTopNav = [
+     '/parkinglayout',
      '/home',
      '/login',
      '/signup',
-     '/'
 ]
 
 const pageTitles = {
@@ -80,8 +86,8 @@ const pageTitles = {
 }
 
 const App = withRouter(({ location }) => {
-     const isFullScreen =  pathsWithoutNav.some(path => location.pathname === path)
-     const isTopFullScreen =  pathsWithoutTopNav.some(path => location.pathname === path)
+     const isFullScreen =  location.pathname === '/' ? true : pathsWithoutNav.some(path => location.pathname.startsWith(path))
+     const isTopFullScreen =  location.pathname === '/' ? true : pathsWithoutTopNav.some(path => location.pathname.startsWith(path))
      return (
           <div>
                {

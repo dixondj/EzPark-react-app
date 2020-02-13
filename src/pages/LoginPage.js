@@ -83,9 +83,10 @@ export default function BasicTextFields() {
   const handlePassword = e2 => {
     setPasswordInput(e2.target.value)
   }
-
+  
   const handleSubmit = e => {
     e.preventDefault()
+    // console.log(`Username: ${usernameInput} , `, `Password: ${passwordInput} .`)
     Axios.post('http://ezpark-next.herokuapp.com/api/v1/users/login', {
         username: `${usernameInput}`,
         password: `${passwordInput}`
@@ -94,14 +95,14 @@ export default function BasicTextFields() {
       const {status, message, token, user} = result.data
         localStorage.setItem('jwt', token)
         history.push(`/home`)
-          toast.success(message, {
-            position: "top-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true
-        });
+        toast.success(message, {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true
+      });
     }).catch(err => {
       console.log(err.response.data.message)
       toast.error(err.response.data.message, {
@@ -126,7 +127,7 @@ export default function BasicTextFields() {
             </IconButton>
           </Link>
           <h3 style={{ display:'block', color: 'white', margin:'auto 30%'}}>Login</h3>
-        </div>
+      </div>
       
         <div style={Timg}>
           <img src={BigLogo} alt="logo" width="75%" style={img} />

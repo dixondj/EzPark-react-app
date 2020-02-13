@@ -17,6 +17,10 @@
   pointer-events: none;
 }
 
+.Toastify__toast--success {
+  background-color: #5d3194;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 1.5s linear;
