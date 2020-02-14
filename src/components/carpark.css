@@ -150,7 +150,7 @@
     color:white;
     font-size: 50px;
     position: absolute;
-    bottom : 50px;
+    bottom : 65px;
     left : 55px;
   }
   .upright {
@@ -159,28 +159,28 @@
     transform: rotate(-270deg);
     position: absolute;
     bottom : 80px;
-    left: 160px;
+    left: 150px;
   }
   .straight {
     color:white;
-    font-size: 40px;
+    font-size: 50px;
     position: absolute;
     bottom : 170px;
-    left: 182px;
+    left: 162px;
   }
   .leftturn {
     color:white;
     font-size: 50px;
     position: absolute;
     bottom : 260px;
-    left : 155px;
+    left : 152px;
   }
   .rightturn2 {
     color:white;
     font-size: 50px;
     position: absolute;
     bottom : 260px;
-    left : 190px;
+    left : 168px;
   }
   .leftturn2 {
     color:white;
@@ -194,7 +194,7 @@
     font-size: 50px;
     position: absolute;
     bottom : 160px;
-    left : 190px;
+    left : 168px;
   }
   .straight2 {
     color:white;

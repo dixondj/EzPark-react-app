@@ -12,6 +12,12 @@ import { nominalTypeHack } from "prop-types";
 import FirstfloorLayout from "../components/CarPark1";
 import SecondfloorLayout from "../components/CarPark2";
 
+{/* <ReactPolling
+    url = {'http://www.google.com'}
+    interval = {3000}
+    onSuccess = {()=> console.log('hello')}
+/> */}
+
 
 const useStyles2 = makeStyles({
     root: {
@@ -39,30 +45,39 @@ const ParkingLayout = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [mall, setMall] = useState({})
     const [value, setValue] = React.useState(0);
-
+    let timer;
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
+    
     useEffect(() => {
+        timer = setInterval(()=> get_item(),1500)
+    }, [])
+
+    const jwt = localStorage.getItem('jwt')
+    const get_item = () =>{
         Axios({
             method: 'post',
             url: `http://ezpark-next.herokuapp.com/api/v1/features/layout/id`,
             data: {
                 mall_id: `${params.id}`
-            }
+            },
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+            },
         })
-            .then(result => {
-                setMall(result.data)
-                console.log(result.data)
-                setIsLoading(false)
-            })
-            .catch(err => {
-                setIsLoading(false)
-                console.log(err.response)
-            })
-    }, [])
+        .then(result => {
+            setMall(result.data)
+            // console.log(result.data)
+            setIsLoading(false)
 
+        })
+        .catch(err => {
+            setIsLoading(false)
+            console.log(err.response)
+        })
+    }
+    
     if (isLoading) {
         return <Loading />
     }
@@ -94,7 +109,7 @@ const ParkingLayout = () => {
                 </Paper>
                 {mall.mall == 'Model' ?
                     <div>
-                        {value == 0 ? <FirstfloorLayout/> : <SecondfloorLayout/>}
+                        {value == 0 ? <FirstfloorLayout parking_details={mall}/> : <SecondfloorLayout/>}
                     </div> :
                     <div>
                         <h1>Stupid</h1>
