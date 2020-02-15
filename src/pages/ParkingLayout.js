@@ -12,13 +12,6 @@ import { nominalTypeHack } from "prop-types";
 import FirstfloorLayout from "../components/CarPark1";
 import SecondfloorLayout from "../components/CarPark2";
 
-{/* <ReactPolling
-    url = {'http://www.google.com'}
-    interval = {3000}
-    onSuccess = {()=> console.log('hello')}
-/> */}
-
-
 const useStyles2 = makeStyles({
     root: {
         flexGrow: 1,
@@ -54,11 +47,12 @@ const ParkingLayout = () => {
         timer = setInterval(()=> get_item(),1500)
     }, [])
 
+    let API_KEY = process.env.REACT_APP_API
     const jwt = localStorage.getItem('jwt')
     const get_item = () =>{
         Axios({
             method: 'post',
-            url: `http://ezpark-next.herokuapp.com/api/v1/features/layout/id`,
+            url: `${API_KEY}features/layout/id`,
             data: {
                 mall_id: `${params.id}`
             },
@@ -109,7 +103,7 @@ const ParkingLayout = () => {
                 </Paper>
                 {mall.mall == 'Model' ?
                     <div>
-                        {value == 0 ? <FirstfloorLayout parking_details={mall}/> : <SecondfloorLayout/>}
+                        {value == 0 ? <FirstfloorLayout parking_details={mall}/> : <SecondfloorLayout parking_details={mall}/>}
                     </div> :
                     <div>
                         <h1>Stupid</h1>

@@ -11,6 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 function FirstfloorLayout(props) {
 
+    let API_KEY = process.env.REACT_APP_API
     //dialog
     const [open, setOpen] = React.useState(false);
     const handleClose = () => {
@@ -22,7 +23,7 @@ function FirstfloorLayout(props) {
         setOpen(false);
         Axios({
             method: 'post',
-            url: `http://ezpark-next.herokuapp.com/api/v1/features/history_add`,
+            url: `${API_KEY}features/history_add`,
             headers:{
                 Authorization: `Bearer ${jwt}`,
             },
@@ -34,18 +35,16 @@ function FirstfloorLayout(props) {
         .then(result =>{
             console.log(result.data)
         })
-
+        
         .catch(err => {
             console.log(err.response)
-            console.log(parkingBay)
         })
     }
-
+    
     // endDialog
-
+    
     const mall = props.parking_details
     const parkingDetails = props.parking_details.parking1
-    // console.log(parkingDetails)
     const [path1, setPath1] = useState(false)
     const [path2, setPath2] = useState(false)
     const [path3, setPath3] = useState(false)
@@ -76,41 +75,10 @@ function FirstfloorLayout(props) {
         }
     ])
 
-    // const newChangeColor = ind => {
-    //     let newLot;
-    //     if (carpark1[ind].status == false) {
-    //         newLot = carpark1.map((lot, index) => (
-    //             ind === index ? ({ lot: lot.lot, color: 'red' }) : lot
-    //         ))
-    //     } else {
-    //         newLot = carpark1.map((lot, index) => (
-    //             ind === index ? ({ lot: lot.lot, color: 'green' }) : lot
-    //         ))
-    //     }
-    //     setCarpark1(newLot)
-    // }
-
-    // const changeColor = (ind)=>{
-    //     console.log(ind)
-    //     let newLot;
-    //     if (carpark1[ind].color=='green'){
-    //         newLot = carpark1.map((lot,index)=>(
-    //             ind===index ? ({lot:lot.lot,color:'red'}) : lot
-    //         ))
-    //     }else{
-    //         newLot = carpark1.map((lot,index)=>(
-    //             ind===index ? ({lot:lot.lot,color:'green'}) : lot
-    //         ))
-    //     }
-    //     setCarpark1(newLot)
-    // }
-
-
     const store = (ind) => {
         setOpen(true);
         setparkingBay(ind)
 
-        console.log('Bye')
     }
     const selectPath = (id) => {
         setPath1(false)
@@ -118,7 +86,6 @@ function FirstfloorLayout(props) {
         setPath3(false)
         setPath4(false)
 
-        console.log(id)
         if (id == 1) {
             setPath1(!path1)
         }
@@ -143,8 +110,7 @@ function FirstfloorLayout(props) {
                             onClick={() => lot.status ? store(lot.id) : selectPath(lot.id)} style={lot.status ? { backgroundColor: 'red' } : { backgroundColor: 'green' }}>{lot.id}</div>
                     ))}
                 </div>
-                {/* <div className='carlot2'> */}
-                {/* </div> */}
+
                 <div className='leveldown'>LEVEL DOWN</div>
                 <div className='entrance'>ENTRANCE</div>
                 <div className='levelup'>LEVEL UP</div>
@@ -180,14 +146,6 @@ function FirstfloorLayout(props) {
                     <div className='upright'>&#8624;</div>
                     <div className='rightturn3'>&#8625;</div>
                 </div>
-                {/* <div className='Next-level'>
-                    <div className='rightturn'>&#8625;</div>
-                    <div className='upright'>&#8624;</div>
-                    <div className='straight'>&#8673;</div>
-                    <div className='straight2'>&#8673;</div>
-                    <div className='rightturn4'>&#8625;</div>
-                    <div className='upright2'>&#8624;</div>
-                </div> */}
             </div>
             <Dialog
                 open={open}

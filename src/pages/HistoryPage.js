@@ -87,12 +87,13 @@ const HistoryPage = () => {
         setModalHistory({})
     };
 
+    let API_KEY = process.env.REACT_APP_API
 
     const jwt = localStorage.getItem('jwt')
     useEffect(() => {
         Axios({
             method: 'get',
-            url: 'http://ezpark-next.herokuapp.com/api/v1/features/history',
+            url: `${API_KEY}features/history`,
             headers: {
                 Authorization: `Bearer ${jwt}`,
             },
@@ -112,7 +113,7 @@ const HistoryPage = () => {
         console.log(historyId)
         Axios({
             method: 'post',
-            url: `http://ezpark-next.herokuapp.com/api/v1/features/history_delete/${historyId}`,
+            url: `${API_KEY}features/history_delete/${historyId}`,
             headers: {
                 Authorization: `Bearer ${jwt}`,
             },

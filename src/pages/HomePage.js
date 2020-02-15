@@ -53,9 +53,11 @@ const HomePage = () => {
 
     const history = useHistory()
 
+    let API_KEY = process.env.REACT_APP_API
+
     useEffect(() => {
         // performing a GET request
-        Axios.get('http://ezpark-next.herokuapp.com/api/v1/features/')
+        Axios.get(`${API_KEY}features/`)
             .then(result => {
                 // If successful, we do stuffs with 'result'
                 setMall(result.data.mall)
@@ -70,23 +72,21 @@ const HomePage = () => {
         setMallName(v)
     }
 
+
     const handleMallSelect = e => {
         e.preventDefault()
-        // console.log(mallName)
         Axios({
             method: 'post',
-            url: `http://ezpark-next.herokuapp.com/api/v1/features/layout`,
+            url: `${API_KEY}features/layout`,
             data: {
                 mall: `${mallName.name}`
             }
         })
 
             .then(result => {
-                // console.log(result.data)
                 history.push({
                     pathname: '/parkinglayout/' + result.data.id
                 })
-                // console.log(result.data)
             })
 
             .catch(err => {

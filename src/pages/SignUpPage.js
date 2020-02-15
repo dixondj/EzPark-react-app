@@ -82,8 +82,9 @@ function SignupPage() {
   }
 
   const handleSubmit = e => {
+    let API_KEY = process.env.REACT_APP_API
     e.preventDefault()
-    Axios.post('http://ezpark-next.herokuapp.com/api/v1/users/signup', {
+    Axios.post(`${API_KEY}users/signup`, {
       username,
       first_name,
       last_name,
