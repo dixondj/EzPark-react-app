@@ -8,9 +8,9 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import styled from 'styled-components';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom'
-
 import { ToastContainer } from 'react-toastify';
-import { toast } from 'react-toastify'
+// import { toast } from 'react-toastify'
+import customToast from './toast'
 
 //styled components css
 
@@ -94,22 +94,29 @@ function SignupPage() {
     })
       .then(result => {
         const { status, message, user } = result.data
-        console.log(result)
-        console.log(status)
-        console.log(message)
-        console.log(user)
         history.push('/login')
+        customToast.success(message, {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)'
+      });
+        
 
       })
       .catch(err => {
         console.log('hi', err.response.data.message)
-        err.response.data.message.forEach(msg => toast.error(msg, {
+        err.response.data.message.forEach(msg => customToast.error(msg, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
-          draggable: true
+          draggable: true,
+          boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)'
         }
         ))
       })
@@ -132,7 +139,7 @@ function SignupPage() {
       <Form onSubmit={handleSubmit} className={classes.root} noValidate autoComplete="off">
         <TextField name="first_name" required id="standard-required" label="First Name" variant="standard" value={first_name} onChange={handleInput} />
         <TextField name="last_name" required id="standard-required" label="Last Name" variant="standard" value={last_name} onChange={handleInput} />
-        <TextField name="hp_number" required id="standard-required" label="Mobile Number" variant="standard" value={hp_number} onChange={handleInput} />
+        <TextField name="hp_number" required id="standard-required" label="Mobile Number (e.g. 60123456789)" variant="standard" value={hp_number} onChange={handleInput} />
         <TextField name="username" required id="standard-required" label="Username" variant="standard" value={username} onChange={handleInput} />
         <TextField name="email" required id="standard-required" label="Email" variant="standard" value={email} onChange={handleInput} />
         <TextField name="password" required id="standard-password-input" label="Password" type="password" autoComplete="current-password" value={password} onChange={handleInput} />

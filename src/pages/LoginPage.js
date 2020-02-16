@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom'
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
-import { toast } from 'react-toastify'
+import customToast from './toast'
+
 
 
 //style
@@ -96,24 +97,16 @@ export default function BasicTextFields() {
       const {status, message, token, user} = result.data
         localStorage.setItem('jwt', token)
         history.push(`/home`)
-        toast.success(message, {
-          position: "top-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true
-      });
+        customToast.success(message, {
+        boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)'
+    });
+        
+      //   toast.success(message, 
     }).catch(err => {
       console.log(err.response.data.message)
-      toast.error(err.response.data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true
-    });
+      customToast.error(err.response.data.message,  {
+        boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)'
+      });
     }) 
 }
 

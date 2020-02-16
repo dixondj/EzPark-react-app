@@ -15,6 +15,8 @@ import TodayIcon from "@material-ui/icons/Today";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import Loading from "../components/Loading";
 
+import { ToastContainer } from 'react-toastify';
+
 const Page = styled.div`
     height: 100%;
     `
@@ -69,6 +71,7 @@ const FindMyCarPage = () => {
     
     return (
         <Page>
+            <ToastContainer closeButton={false} autoClose={5000} style={{marginTop: '55px'}}/>
             <Card className={classes.root} style={{ margin: '5px' }} variant="outlined">
                 <CardContent>
                     <Typography variant="h5" component="h2">

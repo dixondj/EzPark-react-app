@@ -18,7 +18,18 @@
 }
 
 .Toastify__toast--success {
-  background-color: #5d3194;
+  background: #c8a2c8 !important;
+  /* background: #482278 !important; */
+  /* border-radius: 10px !important; */
+  text-align: center;
+  min-height:50px !important;
+}
+
+.Toastify__toast--error {
+  background-color: #ed5858 !important;
+  /* border-radius: 10px !important; */
+  text-align: center;  
+  min-height:50px !important;
 }
 
 @media (prefers-reduced-motion: no-preference) {

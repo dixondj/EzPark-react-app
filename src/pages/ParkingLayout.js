@@ -95,13 +95,13 @@ const ParkingLayout = () => {
                         centered
                     >
                         {
-                            mall.floor.map(floor => (
-                                <Tab label={floor} />
+                            mall.floor.map((floor, index) => (
+                                <Tab label={floor + mall.amount[index]} />
                             ))
                         }
                     </Tabs>
                 </Paper>
-                {mall.mall == 'Model' ?
+                {mall.mall == 'EzMall' ?
                     <div>
                         {value == 0 ? <FirstfloorLayout parking_details={mall}/> : <SecondfloorLayout parking_details={mall}/>}
                     </div> :

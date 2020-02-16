@@ -14,6 +14,8 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
+import { ToastContainer } from 'react-toastify';
+import customToast from './toast'
 
 const useStyles = makeStyles({
     root: {
@@ -122,10 +124,17 @@ const HistoryPage = () => {
             .then(result => {
                 setHistory(result.data.history)
                 console.log(result.data)
+                customToast.success(result.data.message, {
+                    boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)'
+                });
             })
 
             .catch(err => {
                 console.log(err.response)
+                customToast.error(err.response.message, {
+                    boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)'
+                });
+                
             })
     }
 
@@ -133,10 +142,11 @@ const HistoryPage = () => {
     if (isLoading) {
         return <Loading />
     }
-    if (!history.length) return <div>No History</div>
+    if (!history.length) return <div><ToastContainer closeButton={false} autoClose={5000} style={{marginTop: '55px'}}/>No History</div>
 
     return (
         <div style={{height: '100%' }}>
+            <ToastContainer closeButton={false} autoClose={5000} style={{marginTop: '55px'}}/>
             {history.map(history => (
                 <>
                     <Card className={classes.root}>

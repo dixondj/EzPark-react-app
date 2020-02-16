@@ -9,6 +9,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import { useHistory } from 'react-router-dom'
+import customToast from '../pages/toast'
+
 function FirstfloorLayout(props) {
 
     let API_KEY = process.env.REACT_APP_API
@@ -18,6 +21,8 @@ function FirstfloorLayout(props) {
         setOpen(false);
     };
     
+    const history = useHistory()
+
     const jwt = localStorage.getItem('jwt')
     const handleSubmit = () =>{
         setOpen(false);
@@ -34,6 +39,11 @@ function FirstfloorLayout(props) {
 
         .then(result =>{
             console.log(result.data)
+            history.push(`/findmycar`)
+            customToast.success(result.data.message, {
+                boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)'
+            });
+            
         })
         
         .catch(err => {
