@@ -68,8 +68,9 @@ function SignupPage() {
     password: '',
     email: '',
     hp_number: '',
+    cpassword: ''
   })
-  const { username, first_name, last_name, email, password, hp_number } = userInfo
+  const { username, first_name, last_name, email, password, hp_number, cpassword } = userInfo
 
 
   const handleInput = e => {
@@ -84,43 +85,53 @@ function SignupPage() {
   const handleSubmit = e => {
     let API_KEY = process.env.REACT_APP_API
     e.preventDefault()
-    Axios.post(`${API_KEY}users/signup`, {
-      username,
-      first_name,
-      last_name,
-      password,
-      email,
-      hp_number,
-    })
-      .then(result => {
-        const { status, message, user } = result.data
-        history.push('/login')
-        customToast.success(message, {
-          position: "top-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)'
-      });
-        
 
+    if (cpassword !== password) {
+      toast.error('Password and Confirm Password must be same...', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true
       })
-      .catch(err => {
-        console.log('hi', err.response.data.message)
-        err.response.data.message.forEach(msg => customToast.error(msg, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)'
-        }
-        ))
+    } else {
+      Axios.post(`${API_KEY}users/signup`, {
+        username,
+        first_name,
+        last_name,
+        password,
+        email,
+        hp_number,
       })
-
+        .then(result => {
+          const { status, message, user } = result.data
+          console.log(result)
+          console.log(status)
+          console.log(message)
+          console.log(user)
+          history.push('/login')
+          toast.success(message, {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+          });
+        })
+        .catch(err => {
+          err.response.data.message.forEach(msg => toast.error(msg, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+          }
+          ))
+        })
+    }
   }
 
   return (
@@ -143,6 +154,7 @@ function SignupPage() {
         <TextField name="username" required id="standard-required" label="Username" variant="standard" value={username} onChange={handleInput} />
         <TextField name="email" required id="standard-required" label="Email" variant="standard" value={email} onChange={handleInput} />
         <TextField name="password" required id="standard-password-input" label="Password" type="password" autoComplete="current-password" value={password} onChange={handleInput} />
+        <TextField name="cpassword" required id="standard-password-input" label="Confirm Password" type="password" autoComplete="current-password" value={cpassword} onChange={handleInput} />
         <p style={word}>*Make sure your password have at least a capital letter, number and special character!</p>
         <button class="ui purple basic button" style={btn1}>Create an account</button>
       </Form>

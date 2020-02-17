@@ -44,7 +44,7 @@ const ParkingLayout = () => {
     };
     
     useEffect(() => {
-        timer = setInterval(()=> get_item(),1500)
+        timer = setInterval(()=> get_item(),2500)
     }, [])
 
     let API_KEY = process.env.REACT_APP_API
@@ -106,7 +106,7 @@ const ParkingLayout = () => {
                         {value == 0 ? <FirstfloorLayout parking_details={mall}/> : <SecondfloorLayout parking_details={mall}/>}
                     </div> :
                     <div>
-                        <h1>Stupid</h1>
+                        <h1>Coming Soon...</h1>
                     </div>
                 }
             </div>
