@@ -45,3 +45,9 @@
     transform: rotate(360deg);
   }
 }
+
+.spinning {
+  animation: App-logo-spin infinite 0.1s linear !important;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');

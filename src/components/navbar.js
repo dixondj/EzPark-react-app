@@ -30,25 +30,22 @@ const Navbar = (props) => {
   let history = useHistory()
   const classes = useStyles();
   const classes2 = useStyles2();
-  const [value, setValue] = React.useState(0);
-
-  const handleNavigate = e => {
-    history.push(e.currentTarget.name)
-  }
+  const [value, setValue] = React.useState(history.location.pathname);
 
   return (
     <BottomNavigation
       value={value}
       onChange={(event, newValue) => {
-        setValue(newValue);
+        setValue(newValue)
+        history.push(newValue)
       }}
       showLabels
       className={classes.root}
     >
-      <BottomNavigationAction  className={classes2.root} onClick={handleNavigate} name="/home" label="Home" icon={<HomeIcon />} />
-      <BottomNavigationAction  className={classes2.root} onClick={handleNavigate} name="/findmycar" label="Find My Car" icon={<DriveEtaIcon />} />
-      <BottomNavigationAction  className={classes2.root} onClick={handleNavigate} name="/history" label="History" icon={<RestoreIcon />} />
-      <BottomNavigationAction  className={classes2.root} onClick={handleNavigate} name="/setting" label="Setting" icon={<SettingsIcon />} />
+      <BottomNavigationAction className={classes2.root} value="/home" label="Home" icon={<HomeIcon />} />
+      <BottomNavigationAction className={classes2.root} value="/findmycar" label="Find My Car" icon={<DriveEtaIcon />} />
+      <BottomNavigationAction className={classes2.root} value="/history" label="History" icon={<RestoreIcon />} />
+      <BottomNavigationAction className={classes2.root} value="/setting" label="Setting" icon={<SettingsIcon />} />
     </BottomNavigation>
   )
 }

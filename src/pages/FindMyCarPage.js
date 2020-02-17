@@ -93,7 +93,7 @@ const FindMyCarPage = () => {
                                     <td style={{ width: "39%" }}>
                                         <Typography><b>Mall :</b></Typography>
                                     </td>
-                                    <td style={{ width: "40%", textAlign: "right" }}>
+                                    <td style={{ width: "52%", textAlign: "right" }}>
                                         <Typography>{findCar.mall}</Typography>
                                     </td>
                                 </Grid>
@@ -108,7 +108,7 @@ const FindMyCarPage = () => {
                                         <Typography><b>Floor :</b></Typography>
                                     </td>
 
-                                    <td style={{ width: "40%", textAlign: "right" }}>
+                                    <td style={{ width: "52%", textAlign: "right" }}>
                                         <Typography>{findCar.floor}</Typography>
                                     </td>
                                 </Grid>
@@ -122,7 +122,7 @@ const FindMyCarPage = () => {
                                     <td style={{ width: "39%" }}>
                                         <Typography><b>Parking Bay : </b></Typography>
                                     </td>
-                                    <td style={{ width: "40%", textAlign: "right" }}>
+                                    <td style={{ width: "52%", textAlign: "right" }}>
                                         <Typography>{findCar.parking}</Typography>
                                     </td>
                                 </Grid>
@@ -137,7 +137,7 @@ const FindMyCarPage = () => {
                                         <Typography><b>Date :</b></Typography>
                                     </td>
 
-                                    <td style={{ width: "40%", textAlign: "right" }}>
+                                    <td style={{ width: "52%", textAlign: "right" }}>
                                         <Typography>{findCar.date}</Typography>
                                     </td>
                                 </Grid>
@@ -151,7 +151,7 @@ const FindMyCarPage = () => {
                                     <td style={{ width: "39%" }}>
                                         <Typography><b>Time :</b></Typography>
                                     </td>
-                                    <td style={{ width: "40%", textAlign: "right" }}>
+                                    <td style={{ width: "52%", textAlign: "right" }}>
                                         <Typography>{findCar.time}</Typography>
                                     </td>
                                 </Grid>

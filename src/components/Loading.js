@@ -9,23 +9,21 @@ const container = {
 }
 
 const logo = {
-    // filter: 'invert(100%)',
-    position: 'absolute',
+    position: 'fixed',
     left: '31%',
-    top: '30%',
-    transform: 'translate( -50%, -50%)',
+    top: '33.5%',
+    transform: 'translate(-50%, -50%)',
 }
 
 const circle ={
-    position: 'absolute',
-    left: '50%',
-    top: '40%',
-    transform: 'translate( -50%, -50%)',
+    position: 'fixed',
+    left: '49%',
+    top: '42%',
+    transform: 'translate(-50%, -50%)',
     borderRadius: '50%',
-    background: '#5d3194',
+    background: 'rgb(93, 49, 148)',
     height: '100px',
     width: '100px',
-    // border: 'solid black 2px'
 }
 
 const Loading = () => {

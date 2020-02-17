@@ -17,8 +17,8 @@ import customToast from './toast'
 const word = {
   display: 'block',
   textAlign: 'left',
-  marginLeft: '9%',
-  marginTop: '-2%',
+  marginLeft: '14%',
+  marginTop: '6%',
   fontSize: '11px',
   color: 'purple'
 }
@@ -87,7 +87,7 @@ function SignupPage() {
     e.preventDefault()
 
     if (cpassword !== password) {
-      toast.error('Password and Confirm Password must be same...', {
+      customToast.error('Password and Confirm Password must be same...', {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -111,7 +111,7 @@ function SignupPage() {
           console.log(message)
           console.log(user)
           history.push('/login')
-          toast.success(message, {
+          customToast.success(message, {
             position: "top-left",
             autoClose: 5000,
             hideProgressBar: false,
@@ -121,7 +121,7 @@ function SignupPage() {
           });
         })
         .catch(err => {
-          err.response.data.message.forEach(msg => toast.error(msg, {
+          err.response.data.message.forEach(msg => customToast.error(msg, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -154,8 +154,8 @@ function SignupPage() {
         <TextField name="username" required id="standard-required" label="Username" variant="standard" value={username} onChange={handleInput} />
         <TextField name="email" required id="standard-required" label="Email" variant="standard" value={email} onChange={handleInput} />
         <TextField name="password" required id="standard-password-input" label="Password" type="password" autoComplete="current-password" value={password} onChange={handleInput} />
-        <TextField name="cpassword" required id="standard-password-input" label="Confirm Password" type="password" autoComplete="current-password" value={cpassword} onChange={handleInput} />
         <p style={word}>*Make sure your password have at least a capital letter, number and special character!</p>
+        <TextField name="cpassword" required id="standard-password-input" label="Confirm Password" type="password" autoComplete="current-password" value={cpassword} onChange={handleInput} />
         <button class="ui purple basic button" style={btn1}>Create an account</button>
       </Form>
     </>

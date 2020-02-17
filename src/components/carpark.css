@@ -78,9 +78,9 @@
     border: white 3px;
     position: absolute;
     top : 0;
-    right : 0;
+    left : 0;
     border-bottom-style: solid;
-    border-left-style: solid;
+    border-right-style: solid;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,9 +93,9 @@
     border: white 3px;
     position: absolute;
     top : 0;
-    left : 0;
+    right : 0;
     border-bottom-style: solid;
-    border-right-style: solid;
+    border-left-style: solid;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -125,7 +125,7 @@
     height: 3vh;
     position: absolute;
     top : 30px;
-    left : 0;
+    right : 0;
   }
   .box4{
     background: red;
@@ -134,45 +134,51 @@
     height: 0.5vh;
     position: absolute;
     top : 40px;
-    left : 20px;
+    right : 20px;
   }
   .rightturn {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
     position: absolute;
     bottom : 65px;
-    left : 55px;
+    left : 70px;
   }
   .upright {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
     transform: rotate(-270deg);
     position: absolute;
-    bottom : 80px;
-    left: 150px;
+    bottom : 95px;
+    left: 158px;
   }
   .straight {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
     position: absolute;
     bottom : 170px;
-    left: 162px;
+    left: 172px;
   }
   .leftturn {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
     position: absolute;
     bottom : 260px;
-    left : 152px;
+    left : 154px;
   }
   .rightturn2 {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
     position: absolute;
     bottom : 260px;
-    left : 168px;
+    left : 188px;
   }
   .leftturn2 {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
     position: absolute;
@@ -180,13 +186,16 @@
     left : 155px;
   }
   .rightturn3 {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
     position: absolute;
     bottom : 160px;
-    left : 168px;
+    left : 190px;
   }
+
   .straight2 {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 40px;
     position: absolute;
@@ -194,6 +203,7 @@
     left: 182px;
   }
   .rightturn4 {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
     position: absolute;
@@ -201,6 +211,7 @@
     left : 190px;
   }
   .upright2 {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
     transform: rotate(-270deg);
@@ -211,14 +222,14 @@
   .Secondfloorentrance {
     background: #3b3b3b;
     color:white;
-    width:50vw;
+    width:30vw;
     height:5vh;
     border: white 3px;
     position: absolute;
     top : 0;
-    left : 0;
+    right : 0;
     border-bottom-style: solid;
-    border-right-style: solid;
+    border-left-style: solid;
     display: flex;
     flex-wrap:wrap;
     justify-content: center;
@@ -240,59 +251,72 @@
     align-items: center;
   }
   .downright {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
     transform: rotate(-180deg);
     position: absolute;
-    top : 60px;
-    left: 80px;
+    top : 70px;
+    right: 70px;
   }
   .rightdown {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
-    transform: rotate(-270deg);
+    transform: rotate(-90deg);
     position: absolute;
-    top : 90px;
-    left: 160px;
+    top : 103px;
+    right: 150px;
   }
   .downleft {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
     transform: rotate(-180deg);
     position: absolute;
     top : 170px;
-    left: 155px;
+    left: 158px;
   }
   .downright2 {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
     transform: rotate(-180deg);
     position: absolute;
     top : 170px;
-    left: 190px;
+    left: 192px;
   }
   .downleft2 {
+    animation: blinker 2s linear infinite;
     color: white;
     font-size: 50px;
     transform: rotate(-180deg);
     position: absolute;
     top : 280px;
-    left: 155px;
+    left: 158px;
   }
   .down {
+    animation: blinker 2s linear infinite;
     color: white;
-    font-size: 40px;
+    font-size: 50px;
     position: absolute;
-    top : 180px;
-    left: 180px;
+    top : 190px;
+    left: 175px;
   }
   .downright3 {
+    animation: blinker 2s linear infinite;
     color:white;
     font-size: 50px;
     transform: rotate(-180deg);
     position: absolute;
     top : 280px;
-    left: 189px;
+    left: 193px;
+  }
+
+  @keyframes blinker{
+    50% {
+      opacity: 0;
+    }
   }
   .image {
     height: auto;

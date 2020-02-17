@@ -26,14 +26,13 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify'
 
-
 const Page = styled.div`
     height: 100%;
 `
 const useStyles = makeStyles(theme => ({
     root: {
         width: "100%",
-        maxWidth: 360,
+        maxWidth: 400,
         backgroundColor: theme.palette.background.paper
     }
 }));

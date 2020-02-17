@@ -12,6 +12,8 @@ import { nominalTypeHack } from "prop-types";
 import FirstfloorLayout from "../components/CarPark1";
 import SecondfloorLayout from "../components/CarPark2";
 
+import '../App.css';
+
 const useStyles2 = makeStyles({
     root: {
         flexGrow: 1,
@@ -42,14 +44,14 @@ const ParkingLayout = () => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    
+
     useEffect(() => {
-        timer = setInterval(()=> get_item(),2500)
+        timer = setInterval(() => get_item(), 2500)
     }, [])
 
     let API_KEY = process.env.REACT_APP_API
     const jwt = localStorage.getItem('jwt')
-    const get_item = () =>{
+    const get_item = () => {
         Axios({
             method: 'post',
             url: `${API_KEY}features/layout/id`,
@@ -60,18 +62,18 @@ const ParkingLayout = () => {
                 Authorization: `Bearer ${jwt}`,
             },
         })
-        .then(result => {
-            setMall(result.data)
-            // console.log(result.data)
-            setIsLoading(false)
+            .then(result => {
+                setMall(result.data)
+                // console.log(result.data)
+                setIsLoading(false)
 
-        })
-        .catch(err => {
-            setIsLoading(false)
-            console.log(err.response)
-        })
+            })
+            .catch(err => {
+                setIsLoading(false)
+                console.log(err.response)
+            })
     }
-    
+
     if (isLoading) {
         return <Loading />
     }
@@ -103,14 +105,20 @@ const ParkingLayout = () => {
                 </Paper>
                 {mall.mall == 'EzMall' ?
                     <div>
-                        {value == 0 ? <FirstfloorLayout parking_details={mall}/> : <SecondfloorLayout parking_details={mall}/>}
+                        <div>
+                            {value == 0 ? <FirstfloorLayout parking_details={mall} /> : <SecondfloorLayout parking_details={mall} />}
+                        </div>
+                        <div style={{bottom:40 , position:'absolute',fontFamily: "'Nunito', sans-serif", width:'100%', textAlign:'center'}}>
+                            <b style={{color:'green'}}>⚠ Click the green parking bay to show you the route!</b><br/>
+                            <b style={{color:'red'}}>⚠ Click the red parking bay to save your parking info!</b>
+                        </div>
                     </div> :
                     <div>
                         <h1>Coming Soon...</h1>
                     </div>
                 }
             </div>
-        </div>
+        </div>  
     )
 }
 

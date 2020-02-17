@@ -77,6 +77,7 @@ const HistoryPage = () => {
     const [history, setHistory] = useState([])
     const classes = useStyles();
 
+    const [requestLoading, setRequestLoading] = useState(null)
     const [open, setOpen] = useState(false);
     const [modalHistory, setModalHistory] = useState({})
 
@@ -112,6 +113,7 @@ const HistoryPage = () => {
 
     const handleDelete = e => {
         const historyId = e.currentTarget.name
+        setRequestLoading(historyId)
         console.log(historyId)
         Axios({
             method: 'post',
@@ -122,19 +124,22 @@ const HistoryPage = () => {
         })
 
             .then(result => {
+                setRequestLoading(null)
                 setHistory(result.data.history)
                 console.log(result.data)
                 customToast.success(result.data.message, {
+                    autoClose: 3000,
                     boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)'
                 });
             })
 
             .catch(err => {
+                setRequestLoading(null)
                 console.log(err.response)
                 customToast.error(err.response.message, {
                     boxShadow: '2px 2px 20px 2px rgba(0,0,0,0.3)'
                 });
-                
+
             })
     }
 
@@ -142,16 +147,24 @@ const HistoryPage = () => {
     if (isLoading) {
         return <Loading />
     }
-    if (!history.length) return <div><ToastContainer closeButton={false} autoClose={5000} style={{marginTop: '55px'}}/>No History</div>
+    if (!history.length)
+        return (
+            <>
+                <div><ToastContainer closeButton={false} autoClose={5000} style={{ marginTop: '55px' }} /></div>
+                <div style={{height:'100%'}}>
+                    <div style={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'space-around', color:'gray' }}><h1>NO HISTORY</h1></div>
+                </div>
+            </>
+        )
 
     return (
-        <div style={{height: '100%' }}>
-            <ToastContainer closeButton={false} autoClose={5000} style={{marginTop: '55px'}}/>
+        <div style={{ height: '100%' }}>
+            <ToastContainer closeButton={false} autoClose={5000} style={{ marginTop: '55px' }} />
             {history.map(history => (
                 <>
                     <Card className={classes.root}>
                         <CardActions>
-                            <Button onClick={() => { handleClickOpen(history)} } name={history.id} >
+                            <Button onClick={() => { handleClickOpen(history) }} name={history.id} >
                                 <CardContent style={{ width: "100vw", textAlign: "left" }}>
                                     <Typography variant="h5" component="h2">
                                         {history.mall}
@@ -160,7 +173,7 @@ const HistoryPage = () => {
                                 </CardContent>
                             </Button>
                             <Button onClick={handleDelete} name={history.id}>
-                                <CloseIcon />
+                                <CloseIcon className={requestLoading == history.id ? 'spinning' : ''} />
                             </Button>
                         </CardActions>
                     </Card>
@@ -168,7 +181,7 @@ const HistoryPage = () => {
             ))}
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                History ID : {modalHistory.id}
+                    History ID : {modalHistory.id}
                 </DialogTitle>
                 <DialogContent dividers>
                     <Typography gutterBottom>

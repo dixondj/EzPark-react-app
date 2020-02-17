@@ -8,9 +8,13 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import WarningIcon from '@material-ui/icons/Warning';
+import DriveEtaIcon from '@material-ui/icons/DriveEta';
 
 import { useHistory } from 'react-router-dom'
 import customToast from '../pages/toast'
+import { makeStyles } from "@material-ui/core/styles";
+
 
 function FirstfloorLayout(props) {
 
@@ -20,9 +24,14 @@ function FirstfloorLayout(props) {
     const handleClose = () => {
         setOpen(false);
     };
-    
-    const history = useHistory()
+    const useStyles = makeStyles(theme => ({
+        root: {
+            width: "70vw"
+        }
+    }));
 
+    const history = useHistory()
+    const classes = useStyles();
     const jwt = localStorage.getItem('jwt')
     const handleSubmit = () =>{
         setOpen(false);
@@ -163,17 +172,18 @@ function FirstfloorLayout(props) {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Comfirmation..."}</DialogTitle>
+                <DialogTitle className={classes.root} id="alert-dialog-title"><WarningIcon/>&nbsp;{"Did you park here?"} </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
+                        <p><strong>Parking Bay: {parkingBay}</strong></p>
                         <p>Mall: {mall.mall}</p>
-                        <p>Floor: {mall.floor[0]}</p>
-                        <p>Parking Bay: {parkingBay}</p>
+                        <p>Floor: {mall.floor[0]}</p><br/>
+                        <p><strong>⚠ Add this to find my car park!<DriveEtaIcon style={{paddingTop: '7px', fontSize: '1.5em'}} fontSize="large"/></strong></p>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleSubmit} color="primary">
-                        Confirm
+                        Add
                     </Button>
                     <Button onClick={handleClose} color="primary" autoForcus>
                         Cancel

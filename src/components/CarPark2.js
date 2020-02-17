@@ -9,9 +9,13 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import WarningIcon from '@material-ui/icons/Warning';
+import DriveEtaIcon from '@material-ui/icons/DriveEta';
+
 
 import { useHistory } from 'react-router-dom'
 import customToast from '../pages/toast'
+import { makeStyles } from "@material-ui/core/styles";
 
 function SecondfloorLayout(props) {
 
@@ -22,8 +26,14 @@ function SecondfloorLayout(props) {
         setOpen(false);
     };
 
-    const history = useHistory()
+    const useStyles = makeStyles(theme => ({
+        root: {
+            width: "70vw"
+        }
+    }));
 
+    const history = useHistory()
+    const classes = useStyles();
     const jwt = localStorage.getItem('jwt')
     const handleSubmit = () =>{
         setOpen(false);
@@ -131,27 +141,27 @@ function SecondfloorLayout(props) {
                         <div key={index} className='carpark' name="car1" style={lot.status ? {backgroundColor: 'red'}: {backgroundColor: 'green'}} onClick={()=> lot.status ? store(lot.id):selectPath(lot.id)}>{lot.id}</div>
                     ))}        
                 </div>
-                <div className='leveldown2'>LEVEL DOWN</div>
-                <div className='Secondfloorentrance'>2ND FLOOR ENTRANCE</div>
+                {/* <div className='leveldown2'>LEVEL DOWN</div> */}
+                <div className='Secondfloorentrance'>2ND FLOOR</div>
                 <div className='Arrows-bay5' style={path1 ? { display: 'block' } : { display: 'none' }}>
-                <div className='downright'>&#8624;</div>
-                <div className='rightdown'>&#8625;</div>
+                <div className='downright'>&#8625;</div>
+                <div className='rightdown'>&#8624;</div>
                 <div className='downleft'>&#8625;</div>
                 </div>
                 <div className='Arrows-bay6' style={path2 ? { display: 'block' } : { display: 'none' }}>
-                <div className='downright'>&#8624;</div>
-                <div className='rightdown'>&#8625;</div>
+                <div className='downright'>&#8625;</div>
+                <div className='rightdown'>&#8624;</div>
                 <div className='downright2'>&#8624;</div>
                 </div>
                 <div className='Arrows-bay7' style={path3 ? { display: 'block' } : { display: 'none' }}>
-                <div className='downright'>&#8624;</div>
-                <div className='rightdown'>&#8625;</div>
+                <div className='downright'>&#8625;</div>
+                <div className='rightdown'>&#8624;</div>
                 <div className='down'>&#8675;</div>
                 <div className='downleft2'>&#8625;</div>
                 </div>
                 <div className='Arrows-bay8' style={path4 ? { display: 'block' } : { display: 'none' }}>
-                <div className='downright'>&#8624;</div>
-                <div className='rightdown'>&#8625;</div>
+                <div className='downright'>&#8625;</div>
+                <div className='rightdown'>&#8624;</div>
                 <div className='down'>&#8675;</div>
                 <div className='downright3'>&#8624;</div>
                 </div>
@@ -162,17 +172,18 @@ function SecondfloorLayout(props) {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Comfirmation..."}</DialogTitle>
+                <DialogTitle className={classes.root} id="alert-dialog-title"><WarningIcon/>&nbsp;{"Did you park here?"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
+                        <p><strong>Parking Bay: {parkingBay}</strong></p>
                         <p>Mall: {mall.mall}</p>
                         <p>Floor: {mall.floor[1]}</p>
-                        <p>Parking Bay: {parkingBay}</p>
+                        <p><strong>⚠ Add this to find my car park!<DriveEtaIcon style={{paddingTop: '7px', fontSize: '1.5em'}} fontSize="large"/></strong></p>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleSubmit} color="primary">
-                        Confirm
+                        Add
                     </Button>
                     <Button onClick={handleClose} color="primary" autoForcus>
                         Cancel
