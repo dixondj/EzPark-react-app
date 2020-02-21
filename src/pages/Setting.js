@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SettingPage = () => {
-    let API_KEY = process.env.REACT_APP_API
+    // let API_KEY = process.env.REACT_APP_API
     const classes = useStyles();
     const [user, setUser] = useState({})
     const [info, setInfo] = useState(null)
@@ -48,7 +48,7 @@ const SettingPage = () => {
 
     useEffect(() => {
         Axios({
-            url: `${API_KEY}users/current_user`,
+            url: `http://ezpark-next.herokuapp.com/api/v1/users/current_user`,
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${localStorage.jwt}`
@@ -74,7 +74,7 @@ const SettingPage = () => {
     const handleSubmit = e => {
         e.preventDefault()
         Axios({
-            url: `${API_KEY}users/${info.api_url}`,
+            url: `http://ezpark-next.herokuapp.com/api/v1/users/${info.api_url}`,
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${localStorage.jwt}`

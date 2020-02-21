@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 });
 
 const FindMyCarPage = () => {
-    let API_KEY = process.env.REACT_APP_API
+    // let API_KEY = process.env.REACT_APP_API
 
     const classes = useStyles();
     const [findCar, setFindCar] = useState([])
@@ -49,7 +49,7 @@ const FindMyCarPage = () => {
     useEffect(() => {
         Axios({
             method: 'get',
-            url: `${API_KEY}features/find_my_car`,
+            url: `http://ezpark-next.herokuapp.com/api/v1/features/find_my_car`,
             headers: {
                 Authorization: `Bearer ${jwt}`,
             },

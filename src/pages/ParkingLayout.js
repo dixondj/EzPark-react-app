@@ -49,12 +49,12 @@ const ParkingLayout = () => {
         timer = setInterval(() => get_item(), 2500)
     }, [])
 
-    let API_KEY = process.env.REACT_APP_API
+    // let API_KEY = process.env.REACT_APP_API
     const jwt = localStorage.getItem('jwt')
     const get_item = () => {
         Axios({
             method: 'post',
-            url: `${API_KEY}features/layout/id`,
+            url: `http://ezpark-next.herokuapp.com/api/v1/features/layout/id`,
             data: {
                 mall_id: `${params.id}`
             },

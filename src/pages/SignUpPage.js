@@ -83,7 +83,7 @@ function SignupPage() {
   }
 
   const handleSubmit = e => {
-    let API_KEY = process.env.REACT_APP_API
+    // let API_KEY = process.env.REACT_APP_API
     e.preventDefault()
 
     if (cpassword !== password) {
@@ -96,7 +96,7 @@ function SignupPage() {
         draggable: true
       })
     } else {
-      Axios.post(`${API_KEY}users/signup`, {
+      Axios.post(`http://ezpark-next.herokuapp.com/api/v1/users/signup`, {
         username,
         first_name,
         last_name,

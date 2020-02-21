@@ -18,7 +18,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 function FirstfloorLayout(props) {
 
-    let API_KEY = process.env.REACT_APP_API
+    // let API_KEY = process.env.REACT_APP_API
     //dialog
     const [open, setOpen] = React.useState(false);
     const handleClose = () => {
@@ -37,7 +37,7 @@ function FirstfloorLayout(props) {
         setOpen(false);
         Axios({
             method: 'post',
-            url: `${API_KEY}features/history_add`,
+            url: `http://ezpark-next.herokuapp.com/api/v1/features/history_add`,
             headers:{
                 Authorization: `Bearer ${jwt}`,
             },
